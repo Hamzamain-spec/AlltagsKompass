@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlltagsKompass — Orientierung im deutschen Alltag</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--white:#FFFFFF;--off:#F8F9FC;--card:#FFFFFF;--border:#EAECF4;--ink:#0D1117;--mid:#374151;--muted:#6B7280;--light:#9CA3AF;--blue:#1B4FE4;--blue-lt:#EEF2FF;--red:#E41B1B;--yellow:#FFD700;--green:#16A34A}
+body{font-family:'Space Grotesk',sans-serif;background:var(--off);color:var(--ink)}
+
+/* HEADER — bold minimal */
+header{background:var(--white);border-bottom:1px solid var(--border)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{text-decoration:none;display:flex;align-items:center;gap:0}
+.logo-main{font-family:'Fraunces',serif;font-size:28px;font-weight:900;color:var(--ink);letter-spacing:-1px}
+.logo-main em{font-style:italic;color:var(--blue)}
+.logo-sub{font-size:11px;color:var(--muted);font-weight:400;letter-spacing:0.5px;margin-top:2px;display:block}
+.header-right{display:flex;align-items:center;gap:8px}
+.header-nav a{padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;border-radius:8px;transition:all 0.2s}
+.header-nav a:hover{background:var(--blue-lt);color:var(--blue)}
+.subscribe-btn{background:var(--blue);color:#fff;padding:9px 20px;font-size:13px;font-weight:700;border-radius:8px;text-decoration:none;transition:all 0.2s}
+.subscribe-btn:hover{background:#1340C8;transform:translateY(-1px)}
+
+/* CATEGORY BAR */
+.cat-bar{background:var(--ink);overflow-x:auto}
+.cat-bar-inner{max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:0}
+.cat-bar a{display:block;padding:12px 18px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;transition:all 0.2s;border-bottom:2px solid transparent}
+.cat-bar a:hover,.cat-bar a.active{color:#fff;border-bottom-color:var(--blue)}
+
+/* HERO - BIG SPLIT */
+.hero{background:var(--ink);padding:0}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:60% 40%;min-height:480px}
+.hero-left{padding:56px 48px 56px 40px;display:flex;flex-direction:column;justify-content:flex-end;border-right:1px solid rgba(255,255,255,0.06)}
+.hero-right{padding:40px 40px 40px 40px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.hero-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px}
+.hero-label-dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.hero-label-text{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.hero-title{font-family:'Fraunces',serif;font-size:52px;font-weight:900;color:#fff;line-height:1.02;letter-spacing:-1px;margin-bottom:18px}
+.hero-excerpt{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.8;font-weight:300;margin-bottom:28px;max-width:500px}
+.hero-meta{display:flex;align-items:center;gap:16px}
+.hero-cat{background:var(--blue);color:#fff;font-size:10px;font-weight:700;letter-spacing:2px;padding:5px 14px;text-transform:uppercase}
+.hero-author{font-size:13px;color:rgba(255,255,255,0.4);font-weight:500}
+.hero-date{font-size:12px;color:rgba(255,255,255,0.3)}
+.hero-readmore{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:12px;font-weight:700;color:var(--blue);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;border-bottom:1px solid rgba(27,79,228,0.3);padding-bottom:2px}
+.hero-readmore:hover{color:#fff;border-color:rgba(255,255,255,0.3)}
+.hero-side-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:14px}
+.hero-side-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:16px;cursor:pointer;transition:all 0.2s}
+.hero-side-item:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12)}
+.hsi-cat{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:6px}
+.hsi-title{font-size:15px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:6px}
+.hsi-date{font-size:11px;color:rgba(255,255,255,0.3)}
+
+/* STRIP LAYOUT — unique numbered article list */
+.content-area{max-width:1200px;margin:48px auto;padding:0 40px;display:grid;grid-template-columns:1fr 300px;gap:36px}
+.section-label{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.section-label-num{font-family:'Fraunces',serif;font-size:42px;font-weight:900;color:var(--border);line-height:1}
+.section-label-text{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.section-label-line{flex:1;height:1px;background:var(--border)}
+.article-strip{background:var(--card);border:1px solid var(--border);margin-bottom:2px;display:grid;grid-template-columns:64px 1fr 160px;cursor:pointer;transition:all 0.2s;overflow:hidden}
+.article-strip:first-child{border-radius:8px 8px 0 0}
+.article-strip:last-child{border-radius:0 0 8px 8px}
+.article-strip:hover{border-color:var(--blue);background:#FAFBFF}
+.strip-num{display:flex;align-items:center;justify-content:center;background:var(--off);border-right:1px solid var(--border);font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:var(--border);font-style:italic;transition:all 0.2s}
+.article-strip:hover .strip-num{background:var(--blue-lt);color:var(--blue);border-color:rgba(27,79,228,0.2)}
+.strip-body{padding:22px 24px}
+.strip-cat{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:6px}
+.strip-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:8px;letter-spacing:-0.3px}
+.strip-excerpt{font-size:13px;color:var(--muted);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.strip-side{padding:22px 20px;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;border-left:1px solid var(--border)}
+.strip-author{font-size:12px;font-weight:600;color:var(--mid);text-align:right}
+.strip-date{font-size:11px;color:var(--light)}
+.strip-link{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--blue);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
+.strip-link:hover{color:var(--ink)}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:18px}
+.widget{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.wh{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.wh-accent{width:3px;height:16px;background:var(--blue);border-radius:2px}
+.wh-title{font-size:13px;font-weight:700;color:var(--ink)}
+.wb{padding:18px 20px}
+.side-strip{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;align-items:flex-start}
+.side-strip:last-child{border-bottom:none;padding-bottom:0}
+.side-strip:first-child{padding-top:0}
+.ss-num{font-family:'Fraunces',serif;font-size:20px;font-weight:900;color:var(--border);flex-shrink:0;line-height:1;font-style:italic}
+.ss-cat{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:3px}
+.ss-title{font-size:13px;font-weight:600;color:var(--ink);line-height:1.35}
+.ss-title:hover{color:var(--blue)}
+.ss-date{font-size:11px;color:var(--light);margin-top:3px}
+.tag-grid{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:var(--off);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;text-decoration:none;transition:all 0.2s}
+.tag:hover{background:var(--blue-lt);color:var(--blue);border-color:rgba(27,79,228,0.2)}
+.newsletter-box{background:var(--ink);padding:24px;border-radius:10px}
+.nl-title{font-family:'Fraunces',serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;letter-spacing:-0.3px}
+.nl-desc{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px;font-weight:300}
+.nl-input{width:100%;padding:10px 14px;border:none;font-family:'Space Grotesk',sans-serif;font-size:13px;border-radius:6px;margin-bottom:8px;outline:none;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1)}
+.nl-input::placeholder{color:rgba(255,255,255,0.3)}
+.nl-btn{width:100%;padding:10px;background:var(--blue);color:#fff;border:none;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Space Grotesk',sans-serif;border-radius:6px}
+
+.empty-state{text-align:center;padding:80px 20px;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.empty-state h3{font-family:'Fraunces',serif;font-size:28px;font-weight:900;color:var(--ink);margin-bottom:8px}
+.empty-state p{font-size:14px;color:var(--muted)}
+
+footer{background:var(--ink);margin-top:60px}
+.footer-inner{max-width:1200px;margin:0 auto;padding:52px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+.footer-logo{font-family:'Fraunces',serif;font-size:24px;font-weight:900;color:#fff;margin-bottom:10px;letter-spacing:-0.5px}
+.footer-logo em{font-style:italic;color:var(--blue)}
+.footer-inner>div>p{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.35);font-weight:300}
+.footer-col h4{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:14px}
+.footer-col a{display:block;color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color 0.2s}
+.footer-col a:hover{color:var(--blue)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);max-width:1200px;margin:0 auto;padding:18px 40px;display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,0.25)}
+.footer-bottom a{color:rgba(255,255,255,0.25);text-decoration:none;margin-left:14px}
+.footer-bottom a:hover{color:var(--blue)}
+.admin-link{position:fixed;bottom:20px;right:20px;background:var(--blue);color:#fff;padding:10px 20px;font-size:12px;text-decoration:none;opacity:0.4;transition:opacity 0.2s;font-weight:700;border-radius:8px}
+.admin-link:hover{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div><div class="logo-main">Alltags<em>Kompass</em></div><div class="logo-sub">Orientierung im deutschen Alltag</div></div>
+    </a>
+    <div class="header-right">
+      <div class="header-nav">
+        <a href="index.html">Alltag</a>
+        <a href="index.html">Tipps</a>
+        <a href="index.html">Gesellschaft</a>
+        <a href="index.html">Ratgeber</a>
+      </div>
+      <a href="index.html" class="subscribe-btn">Newsletter →</a>
+    </div>
+  </div>
+</header>
+<div class="cat-bar">
+  <div class="cat-bar-inner">
+    <a href="index.html" class="active">Alle</a>
+    <a href="index.html">Alltag</a>
+    <a href="index.html">Ratgeber</a>
+    <a href="index.html">Gesellschaft</a>
+    <a href="index.html">Finanzen</a>
+    <a href="index.html">Gesundheit</a>
+    <a href="index.html">Technik</a>
+    <a href="index.html">Familie</a>
+    <a href="index.html">Karriere</a>
+  </div>
+</div>
+
+<div id="hero-section" class="hero" style="display:none">
+  <div class="hero-inner">
+    <div class="hero-left" id="hero-left"></div>
+    <div class="hero-right" id="hero-right">
+      <div class="hero-side-label">Weitere Beiträge</div>
+      <div id="hero-side-items"></div>
+    </div>
+  </div>
+</div>
+<div id="hero-empty" style="display:none;background:var(--ink);padding:60px 40px;text-align:center">
+  <div style="font-family:'Fraunces',serif;font-size:28px;font-weight:900;color:rgba(255,255,255,0.2)">AlltagsKompass</div>
+  <div style="font-size:14px;color:rgba(255,255,255,0.3);margin-top:8px">Beiträge werden geladen...</div>
+</div>
+
+<div class="content-area">
+  <div>
+    <div class="section-label">
+      <div class="section-label-num">—</div>
+      <div class="section-label-text">Aktuelle Beiträge</div>
+      <div class="section-label-line"></div>
+    </div>
+    <div id="strips-wrap">
+      <div class="empty-state"><h3>Beiträge werden geladen...</h3><p>Bitte warten Sie einen Moment.</p></div>
+    </div>
+  </div>
+  <aside class="sidebar">
+    <div class="newsletter-box">
+      <div class="nl-title">Täglich informiert.</div>
+      <div class="nl-desc">Kein Spam — nur relevante Themen aus dem deutschen Alltag, direkt in dein Postfach.</div>
+      <input class="nl-input" type="email" placeholder="deine@email.de">
+      <button class="nl-btn">Abonnieren →</button>
+    </div>
+    <div class="widget">
+      <div class="wh"><div class="wh-accent"></div><div class="wh-title">Beliebt</div></div>
+      <div class="wb"><div id="sidebar-pop"></div></div>
+    </div>
+    <div class="widget">
+      <div class="wh"><div class="wh-accent" style="background:var(--red)"></div><div class="wh-title">Themen</div></div>
+      <div class="wb"><div class="tag-grid">
+        <a href="#" class="tag">Alltag</a><a href="#" class="tag">Finanzen</a>
+        <a href="#" class="tag">Gesundheit</a><a href="#" class="tag">Familie</a>
+        <a href="#" class="tag">Ratgeber</a><a href="#" class="tag">Karriere</a>
+        <a href="#" class="tag">Technik</a><a href="#" class="tag">Wohnen</a>
+        <a href="#" class="tag">Reisen</a><a href="#" class="tag">Gesellschaft</a>
+      </div></div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo">Alltags<em>Kompass</em></div><p>AlltagsKompass gibt dir Orientierung im deutschen Alltag — mit Ratgebern, Tipps und Perspektiven zu den Themen, die wirklich zählen.</p></div>
+    <div class="footer-col"><h4>Ressorts</h4><a href="#">Alltag</a><a href="#">Ratgeber</a><a href="#">Gesellschaft</a><a href="#">Familie</a></div>
+    <div class="footer-col"><h4>Service</h4><a href="#">Newsletter</a><a href="#">Kontakt</a><a href="#">Über uns</a></div>
+    <div class="footer-col"><h4>Rechtliches</h4><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 AlltagsKompass — Orientierung im deutschen Alltag</span><div><a href="#">Impressum</a><a href="#">Datenschutz</a></div></div>
+</footer>
+<a href="admin.html" class="admin-link">⚙ Admin</a>
+
+<script>
+const SITE_NAME = 'alltagskompass';
+const GIST_ID = '42ea11087f40fdba423f8eb0f575ac96'; // Same Gist for all sites!
+
+async function loadPosts() {
+  const sw = document.getElementById('strips-wrap');
+  const sp = document.getElementById('sidebar-pop');
+  const hs = document.getElementById('hero-section');
+  const he = document.getElementById('hero-empty');
+  const hl = document.getElementById('hero-left');
+  const hsi = document.getElementById('hero-side-items');
+  
+  try {
+    console.log('Fetching from Gist ID:', GIST_ID);
+    
+    const rawUrl = `https://gist.githubusercontent.com/Hamzamain-spec/${GIST_ID}/raw/posts.json`;
+    const response = await fetch(rawUrl);
+    
+    if (response.ok) {
+      const allPosts = await response.json();
+      console.log('All posts from Gist:', allPosts);
+      
+      // Filter by site name
+      const sitePosts = allPosts.filter(post => post.site === SITE_NAME);
+      console.log(`Found ${sitePosts.length} posts for site: ${SITE_NAME}`);
+      
+      // Sort by date (newest first)
+      const sortedPosts = [...sitePosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+      
+      if (sortedPosts.length === 0) {
+        he.style.display = 'block';
+        he.innerHTML = '<div style="font-family:\'Fraunces\',serif;font-size:28px;font-weight:900;color:rgba(255,255,255,0.2)">AlltagsKompass</div><div style="font-size:14px;color:rgba(255,255,255,0.3);margin-top:8px">Noch keine Beiträge — Erstelle deinen ersten im Admin-Bereich.</div>';
+        sw.innerHTML = '<div class="empty-state"><h3>Noch keine Beiträge</h3><p>Inhalte erscheinen bald.</p></div>';
+        sp.innerHTML = '';
+        return;
+      }
+      
+      hs.style.display = 'block';
+      he.style.display = 'none';
+      
+      // Hero (first post)
+      const p = sortedPosts[0];
+      const fd = new Date(p.date).toLocaleDateString('de-DE', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      const exc = p.content.replace(/<[^>]+>/g, '').substring(0, 180) + '...';
+      
+      hl.innerHTML = `
+        <div class="hero-label">
+          <div class="hero-label-dot"></div>
+          <div class="hero-label-text">Hauptbeitrag</div>
+        </div>
+        <div class="hero-title">${p.title}</div>
+        <div class="hero-excerpt">${exc}</div>
+        <div class="hero-meta">
+          <span class="hero-cat">${p.category || 'Alltag'}</span>
+          <span class="hero-author">${p.author || 'Redaktion'}</span>
+          <span class="hero-date">${fd}</span>
+        </div>
+        <a class="hero-readmore" href="post.html?id=${p.id}">Weiterlesen →</a>
+      `;
+      
+      // Side items (next 2 posts)
+      hsi.innerHTML = '';
+      sortedPosts.slice(1, 3).forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'hero-side-item';
+        item.onclick = () => location.href = `post.html?id=${p.id}`;
+        item.innerHTML = `
+          <div class="hsi-cat">${p.category || 'Alltag'}</div>
+          <div class="hsi-title">${p.title}</div>
+          <div class="hsi-date">${new Date(p.date).toLocaleDateString('de-DE')}</div>
+        `;
+        hsi.appendChild(item);
+      });
+      
+      // Strips
+      sw.innerHTML = '';
+      sortedPosts.forEach((p, i) => {
+        const date = new Date(p.date).toLocaleDateString('de-DE');
+        const exc = p.content.replace(/<[^>]+>/g, '').substring(0, 120) + '...';
+        
+        const strip = document.createElement('div');
+        strip.className = 'article-strip';
+        strip.onclick = () => location.href = `post.html?id=${p.id}`;
+        
+        strip.innerHTML = `
+          <div class="strip-num">${String(i + 1).padStart(2, '0')}</div>
+          <div class="strip-body">
+            <div class="strip-cat">${p.category || 'Alltag'}</div>
+            <div class="strip-title">${p.title}</div>
+            <div class="strip-excerpt">${exc}</div>
+          </div>
+          <div class="strip-side">
+            <div>
+              <div class="strip-author">${p.author || 'Redaktion'}</div>
+              <div class="strip-date">${date}</div>
+            </div>
+            <a class="strip-link" href="post.html?id=${p.id}">Lesen →</a>
+          </div>
+        `;
+        
+        sw.appendChild(strip);
+      });
+      
+      // Sidebar popular
+      sp.innerHTML = '';
+      sortedPosts.slice(0, 5).forEach((p, i) => {
+        const side = document.createElement('div');
+        side.className = 'side-strip';
+        side.onclick = () => location.href = `post.html?id=${p.id}`;
+        
+        side.innerHTML = `
+          <div class="ss-num">0${i + 1}</div>
+          <div>
+            <div class="ss-cat">${p.category || 'Alltag'}</div>
+            <a class="ss-title" href="post.html?id=${p.id}">${p.title}</a>
+            <div class="ss-date">${new Date(p.date).toLocaleDateString('de-DE')}</div>
+          </div>
+        `;
+        
+        sp.appendChild(side);
+      });
+      
+      console.log(`Displayed ${sortedPosts.length} posts`);
+    } else {
+      console.error('Failed to fetch from Gist:', response.status);
+      he.style.display = 'block';
+      he.innerHTML = '<div style="font-family:\'Fraunces\',serif;font-size:28px;font-weight:900;color:rgba(255,255,255,0.2)">AlltagsKompass</div><div style="font-size:14px;color:var(--red);margin-top:8px">Fehler beim Laden der Beiträge.</div>';
+    }
+  } catch (error) {
+    console.error('Error loading posts:', error);
+    he.style.display = 'block';
+    he.innerHTML = '<div style="font-family:\'Fraunces\',serif;font-size:28px;font-weight:900;color:rgba(255,255,255,0.2)">AlltagsKompass</div><div style="font-size:14px;color:var(--red);margin-top:8px">Fehler: ' + error.message + '</div>';
+  }
+}
+
+// Load posts when page loads
+loadPosts();
+
+// Auto-refresh every 30 seconds
+setInterval(loadPosts, 30000);
+</script>
+</body>
+</html>
